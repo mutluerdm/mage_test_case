@@ -1,0 +1,14 @@
+title = "mage api config"
+
+[mongo]
+host = "195.244.35.10"
+port = 5432
+database = "erdemtest"
+user = "erdem"
+password = "rdmtest"
+max_open = 100
+max_idle = 10
+
+[api]
+host = "192.168.190.129"
+port = "7979"
