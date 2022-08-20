@@ -28,3 +28,9 @@ func New(cfg *config.Config) (error, *Repo) {
 
 	return nil, r
 }
+
+func (r *Repo) ShutDown() {
+	mlog.Printf("Repo shutting down")
+	// TODO wait connections and
+	mlog.Printf("Repo down.")
+}
