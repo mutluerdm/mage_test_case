@@ -1,6 +1,8 @@
 # mage_test_case
 Mage Games Backend Case Study
 
+> Note: `config.toml file should be in the same folder as the build file.
+
 #### testing host
 ```sh
 http://139.59.213.250:8080
