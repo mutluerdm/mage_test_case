@@ -10,7 +10,7 @@ http://139.59.213.250:8080
 ```sh
 Post /v1/user/register
 ```
-### params
+#### params
 
 ```javascript
 {
@@ -19,7 +19,7 @@ Post /v1/user/register
 }
 ```
 
-### example response
+#### example response
 
 ```javascript
 {
@@ -37,7 +37,7 @@ Post /v1/user/register
 ```sh
 Post /v1/user/login
 ```
-### params
+#### params
 
 ```javascript
 {
@@ -46,7 +46,7 @@ Post /v1/user/login
 }
 ```
 
-### example response
+#### example response
 
 ```javascript
 {
@@ -64,7 +64,7 @@ Post /v1/user/login
 ```sh
 Post /v1/endgame
 ```
-### params
+#### params
 
 ```javascript
 {
@@ -77,7 +77,7 @@ Post /v1/endgame
  }
 ```
 
-### example response
+#### example response
 
 ```javascript
 {
@@ -109,13 +109,13 @@ Post /v1/endgame
 ```sh
 Post /v1/leaderboard
 ```
-### params
+#### params
 
 ```javascript
 -
 ```
 
-### example response
+#### example response
 
 ```javascript
 {
