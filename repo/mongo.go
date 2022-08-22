@@ -72,6 +72,10 @@ func NewMongo(cfg *config.Config) (*Mongo, error) {
 	return &mongo, nil
 }
 
+func (m *Mongo) ShutDown() {
+	//TODO wait tasks
+}
+
 func (m *Mongo) registerMongo(req *model.RegisterRequest) (*model.RegisterResponse, error) {
 	req.Id = (int64)(m.autoInc.Next(colUsers))
 	_, err := m.mongoDatabase.Collection(colUsers).InsertOne(context.TODO(), &req)
