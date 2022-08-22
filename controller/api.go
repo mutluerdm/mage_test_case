@@ -32,7 +32,6 @@ func NewAPI(cnf *config.Config) (*ApiController, error) {
 		mu:   sync.RWMutex{},
 	}
 	router := gin.Default()
-	router.StaticFile("test.html", "./test.html")
 	routerV1 := router.Group("/v1")
 	routerV1.POST("user/register", ac.handleRegister)
 	routerV1.POST("user/login", ac.handleLogin)
