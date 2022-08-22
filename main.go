@@ -6,21 +6,17 @@ import (
 	"mage_test_case/config"
 	"mage_test_case/controller"
 	"mage_test_case/mlog"
-	"os"
-	"path/filepath"
 )
 
 func main() {
-	fmt.Println("hola\n API UP!")
+	fmt.Println("hola\nAPI UP!")
 	mlog.InitLoggers()
 	conf := config.LoadConfigs()
 	mlog.Printf("config loaded : %+v", conf.Title)
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	apiController, err := controller.NewAPI(&conf)
 	if err != nil {
-		mlog.Fatal(err)
+		mlog.PrintErrf("Server Cannot Start err : %+v", err)
+		return
 	}
-	mlog.Println("root dir : ", dir)
-	ac := controller.NewAPI(&conf)
-	ac.Start(conf, context.Background())
-
+	apiController.Start(conf, context.Background())
 }

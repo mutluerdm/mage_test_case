@@ -21,11 +21,11 @@ type ApiController struct {
 	mu     sync.RWMutex
 }
 
-func NewAPI(cnf *config.Config) *ApiController {
-	err, r := repo.New(cnf)
+func NewAPI(cnf *config.Config) (*ApiController, error) {
+	r, err := repo.New(cnf)
 	if err != nil {
 		mlog.PrintErrf("Repo Error : %+v", err)
-		return nil
+		return nil, err
 	}
 	ac := ApiController{
 		repo: r,
@@ -38,32 +38,32 @@ func NewAPI(cnf *config.Config) *ApiController {
 	routerV1.POST("user/login", ac.handleLogin)
 	routerV1.POST("endgame", ac.handleEndGame)
 	routerV1.POST("leaderboard", ac.handleLeaderboard)
+	gin.SetMode(gin.DebugMode)
 	ac.engine = router
-	return &ac
+	return &ac, nil
+}
+
+func (ac *ApiController) Start(cnf config.Config, ctx context.Context) {
+	var gracefulStop = make(chan os.Signal)
+	srv := http.Server{
+		Addr:    ":" + cnf.Api.Port,
+		Handler: ac.engine,
+	}
+	signal.Notify(gracefulStop, syscall.SIGTERM)
+	signal.Notify(gracefulStop, syscall.SIGINT)
+	go func() {
+		sig := <-gracefulStop
+		mlog.Printf("caught sig: %+v\n", sig)
+		mlog.Printf("Server shutting down willingly")
+		srv.Shutdown(ctx)
+	}()
+	if err := srv.ListenAndServe(); err != nil {
+		ac.Shutdown(ctx)
+	}
 }
 
 func (ac *ApiController) Shutdown(ctx context.Context) {
 	log.Println("API shutting down")
 	//TODO wait to complete requests
 	ac.repo.ShutDown()
-}
-
-func (ac *ApiController) Start(cnf config.Config, ctx context.Context) {
-	var gracefulStop = make(chan os.Signal)
-	signal.Notify(gracefulStop, syscall.SIGTERM)
-	signal.Notify(gracefulStop, syscall.SIGINT)
-	srv := http.Server{
-		Addr:    ":" + cnf.Api.Port,
-		Handler: ac.engine,
-	}
-	go func() {
-		sig := <-gracefulStop
-		mlog.Printf("caught sig: %+v\n", sig)
-		mlog.Printf("Server shutting down")
-		srv.Shutdown(ctx)
-	}()
-
-	if err := srv.ListenAndServe(); err != nil {
-		ac.Shutdown(ctx)
-	}
 }

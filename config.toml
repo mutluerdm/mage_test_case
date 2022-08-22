@@ -1,14 +1,11 @@
 title = "mage api config"
 
 [mongo]
-host = "195.244.35.10"
-port = 5432
-database = "erdemtest"
-user = "erdem"
-password = "rdmtest"
-max_open = 100
-max_idle = 10
+url = "mongodb+srv://erdem:5375Erdem@cluster0.yh5hk3t.mongodb.net/?retryWrites=true&w=majority"
+database = "mage"
+max_open = 20
+max_idle = 5
 
 [api]
-host = "192.168.190.129"
-port = "7979"
+host = "127.0.0.1"
+port = "8080"

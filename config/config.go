@@ -13,11 +13,8 @@ type Config struct {
 }
 
 type MongoConfig struct {
-	Host     string `toml:"host"`
-	Port     int    `toml:"port"`
+	Url      string `toml:"url"`
 	Database string `toml:"database"`
-	User     string `toml:"user"`
-	Password string `toml:"password"`
 	MaxOpen  int64  `toml:"max_open"`
 	MaxIdle  int64  `toml:"max_idle"`
 }
