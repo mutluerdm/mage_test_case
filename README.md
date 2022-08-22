@@ -1,9 +1,14 @@
 # mage_test_case
 Mage Games Backend Case Study
-
+https://www.postman.com/mutluerdm/workspace/mage-test/collection/1085590-d557e6e6-d46b-4523-ae63-2c4179b711e7?action=share&creator=1085590
 #### testing host
 ```sh
 http://139.59.213.250:8080
+```
+
+#### postman collection for testing
+```sh
+https://www.postman.com/mutluerdm/workspace/mage-test/collection/1085590-d557e6e6-d46b-4523-ae63-2c4179b711e7?action=share&creator=1085590
 ```
 
 ## register
